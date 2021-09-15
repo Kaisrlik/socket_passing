@@ -1,9 +1,17 @@
-all: srv cli nf
+.PHONY: all clean
 
-srv: srv.c
-	gcc -o srv srv.c -I/usr/include/libnl3/ -lnl-3 -lnl-nf-3
-cli: cli.c
-	gcc -o cli cli.c -I/usr/include/libnl3/ -lnl-3 -lnl-nf-3
+TARGETS := srv cli nfq
+CC := gcc
+CFLAGS := -I/usr/include/libnl3/
+LDFLAGS := -Wl,-lnl-3 -Wl,-lnl-nf-3
 
-nf:
-	gcc -o nfq nf-queue.c -lmnl -lnetfilter_queue
+all: $(TARGETS)
+
+nfq: nf-queue.c
+	$(CC) -o $@ $< $(CFLAGS) -lmnl -lnetfilter_queue
+
+%: %.c
+	$(CC) -o $@ $< $(CFLAGS) $(LDFLAGS)
+
+clean:
+	rm -f $(TARGETS)
