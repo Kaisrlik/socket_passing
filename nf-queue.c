@@ -35,7 +35,7 @@ static struct cmsghdr   *cmptr = NULL;      /* malloc'ed first time */
 #include <stdlib.h>
 #include <unistd.h>
 
-char *socket_path = "/tmp/socket";
+char *socket_path = "./socket";
 
 int client() {
 	struct sockaddr_un addr;

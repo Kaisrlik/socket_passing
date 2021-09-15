@@ -21,7 +21,7 @@ static struct cmsghdr   *cmptr = NULL;      /* malloc'ed first time */
 #include <netlink/socket.h>
 #endif
 
-char *socket_path = "/tmp/socket";
+char *socket_path = "./socket";
 
 int client() {
 	struct sockaddr_un addr;
